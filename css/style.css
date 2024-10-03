@@ -38,7 +38,11 @@
   font-family: inherit;
   font-size: 1rem;
   padding: 0.5rem 1rem;
+  cursor: pointer;
  }
+ .btn:hover {
+  background-color: rgb(218, 213, 213);
+}
  .again{
   position: absolute;
   top: 1rem;
@@ -81,3 +85,14 @@
     margin-bottom: 1.5rem;
   }
   /* Left section styles end */
+  /* Right section styles start */
+  .right{
+    width: 50%;
+  }
+  .gess-message{
+    margin-bottom: 1rem;
+  }
+  .label-score{
+    margin-bottom: 1rem;
+  }
+  /* Right section styles end */
