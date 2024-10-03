@@ -36,6 +36,7 @@
  .btn{
   border: none;
   font-family: inherit;
+  font-size: 1rem;
   padding: 0.5rem 1rem;
  }
  .again{
@@ -56,3 +57,27 @@
   transform: translate(-50%, 50%);
  }
   /*Header styles end*/
+  /* Left section styles start */
+  main{
+    display: flex;
+    align-items: center;
+    height: 65vh;
+   }
+  .left{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .number-input{
+    background: none;
+    border: 4px solid #fff;
+    font-size: 2.5rem; 
+    font-family: inherit;
+    color: inherit;
+    text-align: center;
+    width: 10rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  /* Left section styles end */
