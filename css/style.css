@@ -84,6 +84,9 @@
     padding: 1rem;
     margin-bottom: 1.5rem;
   }
+  .disabled{
+    pointer-events: none;
+  }
   /* Left section styles end */
   /* Right section styles start */
   .right{
