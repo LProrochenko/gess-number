@@ -1,54 +1,80 @@
 'use strict';
 
-let secretNumber = Math.floor(Math.random() * 20) + 1;
+// Initial data
+let secretNumber = getRandomNumber();
 let score = 20;
 let highscore = 0;
 
-document.querySelector('.check').addEventListener('click', function () {
-  const inputNumber = Number(document.querySelector('.number-input').value);
-  document.querySelector('.number-input').value = '';
-  document.querySelector('.number-input').focus();
+// Nodes
+const bodyNode = document.querySelector('body');
+const scoreNode = document.querySelector('.score');
+const highscoreNode = document.querySelector('.highscore');
+const gessMessageNode = document.querySelector('.gess-message');
+const questionNode = document.querySelector('.question');
+const numberInputNode = document.querySelector('.number-input');
+const checkNode = document.querySelector('.check');
 
+// Listeners
+checkNode.addEventListener('click', function () {
+  const inputNumber = Number(numberInputNode.value);
+  numberInputNode.value = '';
 
   if (!inputNumber) {
-    document.querySelector('.gess-message').textContent = 'Enter a number';
+    displayGessMessage('Enter a number');
+    numberInputNode.focus();
   } else if (inputNumber === secretNumber) {
-    document.querySelector('.gess-message').textContent = 'Congratulations!!!';
-    document.querySelector('.question').textContent = secretNumber;
-    document.querySelector('body').style.backgroundColor = 'green';
-    document.querySelector('.check').classList.add('disabled');
+    displayGessMessage('Congratulations!!!');
+    questionNode.textContent = secretNumber;
+    bodyNode.style.backgroundColor = 'green';
+    disabledControls();
 
     if (score > highscore) {
       highscore = score;
-      document.querySelector('.highscore').textContent = score;
+      highscoreNode.textContent = score;
     }
-  } else if (inputNumber !== secretNumber) {
-
+  } else {
     if (score > 1) {
+      numberInputNode.focus();
 
       if (inputNumber > secretNumber) {
-        document.querySelector('.gess-message').textContent =
-          `Try a smaller number than ${inputNumber}`;
+        displayGessMessage(`Try a smaller number than ${inputNumber}`);
       } else {
-        document.querySelector('.gess-message').textContent = `Try a greater number than ${inputNumber}`;
+        displayGessMessage(`Try a greater number than ${inputNumber}`);
       }
+
       score--;
-      document.querySelector('.score').textContent = score;
+      scoreNode.textContent = score;
     } else {
-      document.querySelector('.gess-message').textContent = 'Game over';
-      document.querySelector('.score').textContent = 0;
+      displayGessMessage('Game over');
+      scoreNode.textContent = 0;
+      disabledControls();
     }
   }
 });
 
 document.querySelector('.again').addEventListener('click', function () {
-  secretNumber = Math.floor(Math.random() * 20) + 1;
+  secretNumber = getRandomNumber();
   score = 20;
-  document.querySelector('.score').textContent = score;
-  document.querySelector('body').style.backgroundColor = '#000';
-  document.querySelector('.gess-message').textContent = 'Start guessing';
-  document.querySelector('.question').textContent = '???';
-  document.querySelector('.number-input').value = '';
-  document.querySelector('.check').classList.remove('disabled');
+
+  scoreNode.textContent = score;
+  bodyNode.style.backgroundColor = '#000';
+  displayGessMessage('Start guessing');
+  questionNode.textContent = '???';
+  numberInputNode.value = '';
+  checkNode.classList.remove('disabled');
+  numberInputNode.classList.remove('disabled');
 });
 
+// Functions
+function displayGessMessage(message) {
+  gessMessageNode.textContent = message;
+}
+
+function getRandomNumber() {
+  return Math.floor(Math.random() * 20) + 1;
+}
+
+function disabledControls() {
+  numberInputNode.classList.add('disabled');
+  checkNode.classList.add('disabled');
+}
